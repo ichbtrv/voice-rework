@@ -47,3 +47,10 @@ export const record = () => {
   else clearTimers(timer);
   voiceStore.update(vs => {return {...vs, recording: !vs.recording}});
 }
+
+
+export const clearAudio = () => {
+  voiceStore.update(vs => {return {...vs, audio_src: '', duration: 0}});
+  if(counter) clearTimers(counter);
+  if(timer) clearTimers(timer);
+}
