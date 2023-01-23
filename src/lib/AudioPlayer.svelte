@@ -53,10 +53,13 @@
       hidden={playing || instructionsShown}
       class="text-4xl mx-4 inline-flex justify-center {!playing ? 'mt-48' : ''}"
     >
-      Now Press the Play Icon.
+    Press the Play Icon to hear the recording.
     </div>
     <div hidden={playing || instructionsShown} class="text-2xl mx-4 inline-flex justify-center">
-      Or the Floppy Disk Icon to save
+      Click the Floppy Disk Icon to save
+    </div>
+    <div hidden={playing || instructionsShown} class="text-2xl mx-4 inline-flex justify-center">
+      Click the Trash Can to delete
     </div>
   {:else}
     <div class="text-4xl mx-4 mt-48">
