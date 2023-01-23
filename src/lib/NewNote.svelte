@@ -1,15 +1,15 @@
 <script lang="ts">
-  import { note } from "./stores/note";
-  import { notesInit } from "./stores/notes";
-  
+  import { note } from './stores/note';
+  import { notesInit } from './stores/notes';
+
   $: noteContent = $note;
 
-  let title = "";
-  let buttonText = "Save";
+  let title = '';
+  let buttonText = 'Save';
 
   function handleNote() {
     notesInit(title, noteContent);
-    buttonText = "Saved!";
+    buttonText = 'Saved!';
   }
 </script>
 

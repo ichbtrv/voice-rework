@@ -1,16 +1,16 @@
 <script lang="ts">
-  import { createEventDispatcher } from "svelte";
-  import { play, voiceStore } from "./stores/voice-store";
-  import AudioAnalyzer from "./utils/AudioAnalyzer";
-  import AudioVisualizer from "./AudioVisualizer.svelte";
+  import { createEventDispatcher } from 'svelte';
+  import { play, voiceStore } from './stores/voice-store';
+  import AudioAnalyzer from './utils/AudioAnalyzer';
+  import AudioVisualizer from './AudioVisualizer.svelte';
 
   $: audio_src = $voiceStore.audio_src;
-  $: playing = $voiceStore.playing
+  $: playing = $voiceStore.playing;
 
   let audio: HTMLAudioElement;
   let analyser;
   let spectrum = [];
-  let instructionsShown = false; 
+  let instructionsShown = false;
 
   const handlePlay = () => {
     play();
@@ -53,12 +53,18 @@
       hidden={playing || instructionsShown}
       class="text-4xl mx-4 inline-flex justify-center {!playing ? 'mt-48' : ''}"
     >
-    Press the Play Icon to hear the recording.
+      Press the Play Icon to hear the recording.
     </div>
-    <div hidden={playing || instructionsShown} class="text-2xl mx-4 inline-flex justify-center">
+    <div
+      hidden={playing || instructionsShown}
+      class="text-2xl mx-4 inline-flex justify-center"
+    >
       Click the Floppy Disk Icon to save
     </div>
-    <div hidden={playing || instructionsShown} class="text-2xl mx-4 inline-flex justify-center">
+    <div
+      hidden={playing || instructionsShown}
+      class="text-2xl mx-4 inline-flex justify-center"
+    >
       Click the Trash Can to delete
     </div>
   {:else}

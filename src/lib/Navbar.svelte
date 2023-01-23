@@ -11,7 +11,7 @@
   $: playing = $voiceStore.playing;
 
   const reset = () => {
-    if(!$note) return;
+    if (!$note) return;
 
     clearNote();
     clearAudio();

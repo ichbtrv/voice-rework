@@ -1,6 +1,6 @@
 <script lang="ts">
-  import NewNote from "./NewNote.svelte";
-  import ModalButton from "./ModalButton.svelte";
+  import NewNote from './NewNote.svelte';
+  import ModalButton from './ModalButton.svelte';
 
   export let modalVisible: boolean;
 

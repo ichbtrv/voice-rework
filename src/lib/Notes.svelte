@@ -12,7 +12,7 @@
 <section
   class="flex mx-4 text-xl px-4 py-2 w-20 justify-center text-white bg-teal-300 rounded"
 >
-  <button on:click={(e) => (noteView = false)}>Back</button>
+  <button on:click={() => noteView = false}>Back</button>
 </section>
 <section class="flex flex-wrap justify-center md:justify-start">
   {#if prevNotes}

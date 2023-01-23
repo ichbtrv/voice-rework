@@ -1,17 +1,18 @@
 <script lang="ts">
-  import { onMount } from "svelte";
-  import { voiceStore } from "./stores/voice-store";
-  import { note } from "./stores/note";
-  
+  import { onMount } from 'svelte';
+  import { voiceStore } from './stores/voice-store';
+  import { note } from './stores/note';
+
   $: recording = $voiceStore.recording;
-  $: duration  = $voiceStore.duration;
+  $: duration = $voiceStore.duration;
   $: noteContent = $note;
 
   let recordingStarted = false;
   let timer: number;
   let media = [];
   let mediaRecorder: MediaRecorder;
-  let SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  let SpeechRecognition =
+    window.SpeechRecognition || window.webkitSpeechRecognition;
   let recognition = new SpeechRecognition();
 
   recognition.continuous = true;
@@ -39,14 +40,14 @@
 
   onMount(async () => {
     const stream = await navigator.mediaDevices.getUserMedia({
-      audio: true,
+      audio: true
     });
 
     mediaRecorder = new MediaRecorder(stream);
 
     mediaRecorder.ondataavailable = (e) => media.push(e.data);
     mediaRecorder.onstop = function () {
-      const blob = new Blob(media, { type: "audio/wav; codecs=opus" });
+      const blob = new Blob(media, { type: 'audio/wav; codecs=opus' });
       media = [];
       voiceStore.update((vs) => {
         return { ...vs, audio_src: window.URL.createObjectURL(blob) };
