@@ -2,8 +2,8 @@
   import Icon from './Icon.svelte';
   import {play, record, voiceStore} from './stores/voice-store';
 
-  let counter = 0;
-  let duration = 0;
+  $: counter = $voiceStore.counter;
+  $: duration = $voiceStore.duration;
   $: recording = $voiceStore.recording;
   $: playing = $voiceStore.playing
 </script>
