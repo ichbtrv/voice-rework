@@ -49,24 +49,20 @@
         src={audio_src}
       />
     </div>
-    <div
-      hidden={playing || instructionsShown}
-      class="text-4xl mx-4 inline-flex justify-center {!playing ? 'mt-48' : ''}"
-    >
-      Press the Play Icon to hear the recording.
-    </div>
-    <div
-      hidden={playing || instructionsShown}
-      class="text-2xl mx-4 inline-flex justify-center"
-    >
-      Click the Floppy Disk Icon to save
-    </div>
-    <div
-      hidden={playing || instructionsShown}
-      class="text-2xl mx-4 inline-flex justify-center"
-    >
-      Click the Trash Can to delete
-    </div>
+    <section class ="flex flex-col justify-center items-center" hidden={playing || instructionsShown}>
+      <div
+        class="text-4xl mx-4  
+        {!playing ? 'mt-48' : ''}"
+      >
+        Press the Play Icon to hear the recording.
+      </div>
+      <div class="text-2xl mx-4">
+        Click the Floppy Disk Icon to save
+      </div>
+      <div class="text-2xl mx-4">
+        Click the Trash Can to delete
+      </div>
+    </section>
   {:else}
     <div class="text-4xl mx-4 mt-48">
       Press the Microphone Icon to Start Recording.
