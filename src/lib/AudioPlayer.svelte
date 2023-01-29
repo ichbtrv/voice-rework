@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte';
   import { play, voiceStore } from './stores/voice-store';
   import AudioAnalyzer from './utils/AudioAnalyzer';
   import AudioVisualizer from './AudioVisualizer.svelte';
@@ -16,10 +15,10 @@
     play();
     instructionsShown = true;
     analyser.stop;
+
   };
 
-  $: {
-    if (audio && playing) {
+  $: if (audio && playing) {
       if (!analyser) {
         analyser = new AudioAnalyzer(audio);
       }
@@ -27,15 +26,14 @@
       analyser.connect();
       analyser.process();
     }
-  }
+  
 
-  $: {
-    if (analyser) {
+  $: if (analyser) {
       analyser.store.subscribe((volume) => {
         spectrum = volume;
       });
     }
-  }
+  
 </script>
 
 <section class="flex flex-col justify-center">
