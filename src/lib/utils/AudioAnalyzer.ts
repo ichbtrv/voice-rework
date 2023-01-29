@@ -98,9 +98,9 @@ export default class AudioAnalyzer {
             }
         });
 
-      const frequencies = [...HFreq, ...highFreq, ...midFreq, ...lowFreq, ...veryLowReq];
-    const mappedFrequencies = frequencies.map(v => Math.round(v * 255));
+        const frequencies = [...HFreq, ...highFreq, ...midFreq, ...lowFreq, ...veryLowReq];
+        const mappedFrequencies = frequencies.map(v => Math.round(v * 255));
 
-    return new Uint8Array(mappedFrequencies);
+        return new Uint8Array(mappedFrequencies);
     }
 }
