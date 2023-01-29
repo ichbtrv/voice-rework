@@ -8,8 +8,8 @@
   import { onMount } from 'svelte';
   import { voiceStore } from './lib/stores/voice-store';
   import { note } from './lib/stores/note';
-    import NewNote from './lib/NewNote.svelte';
-    import ModalMessage from './lib/ModalMessage.svelte';
+  import NewNote from './lib/NewNote.svelte';
+  import ModalMessage from './lib/ModalMessage.svelte';
 
   let noteView = false;
   let modalVisible = false;
