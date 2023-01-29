@@ -7,10 +7,13 @@
   import { recorder } from'./lib/utils/recorder';
   import { onMount } from 'svelte';
   import { voiceStore } from './lib/stores/voice-store';
+  import { note } from './lib/stores/note';
+    import NewNote from './lib/NewNote.svelte';
+    import ModalMessage from './lib/ModalMessage.svelte';
 
   let noteView = false;
   let modalVisible = false;
-
+  $: noteContent = $note;
   $: recording = $voiceStore.recording;
   $: recordingStarted = false;
   
@@ -37,7 +40,13 @@
     </section>
     <section>
       <AudioNote />
-      <Modal bind:modalVisible />
+      <Modal bind:modalVisible>
+        {#if !noteContent}
+          <ModalMessage message="Please record a note first"/>
+        {:else}
+          <NewNote/>
+        {/if}
+      </Modal>
     </section>
   {:else}
     <Notes bind:noteView />

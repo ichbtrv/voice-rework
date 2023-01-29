@@ -1,5 +1,4 @@
 <script lang="ts">
-  import NewNote from './NewNote.svelte';
   import ModalButton from './ModalButton.svelte';
 
   export let modalVisible: boolean;
@@ -18,9 +17,7 @@
     aria-modal="true"
     on:click|stopPropagation
   >
-    <div
-      class="flex items-center justify-center pt-4 px-4 pb-20 text-center sm:block sm:p-0"
-    >
+    <div class="flex items-center justify-center pt-4 px-4 pb-20 text-center sm:block sm:p-0">
       {#if bgOverlay}
         <div
           on:click={onHide}
@@ -29,11 +26,9 @@
         />
       {/if}
 
-      <div
-        class="inline-block h-96 w-96 border align-bottom bg-white p-4 text-left rounded-lg transform shadow-xl sm:align-middle sm:max-w-lg sm:w-full"
-      >
+      <div class="inline-block h-96 w-96 border align-bottom bg-white p-4 text-left rounded-lg transform shadow-xl sm:align-middle sm:max-w-lg sm:w-full">
         <ModalButton bind:modalVisible />
-        <NewNote />
+        <slot></slot>
       </div>
     </div>
   </div>
