@@ -21,7 +21,6 @@ export default class AudioAnalyzer {
     sampleRate: number;
     analyser: AnalyserNode;
     source: MediaElementAudioSourceNode;
-    script: AudioWorkletNode;
     spectrum: Uint8Array;
     store: Writable<Uint8Array>;
 
@@ -32,7 +31,6 @@ export default class AudioAnalyzer {
         this.analyser.smoothingTimeConstant = 0.4;
         this.analyser.fftSize = 1024;
         this.source = this.context.createMediaElementSource(source);
-        this.script = this.context.createScriptProcessor(1024 * 2, 1, 1);
         this.spectrum = new Uint8Array(this.analyser.frequencyBinCount);
         this.source.connect(this.analyser);
         this.store = writable(this.spectrum);
@@ -44,7 +42,8 @@ export default class AudioAnalyzer {
     }
 
     process() {
-        this.script.addEventListener('audioprocess', this.processNode);
+        requestAnimationFrame(this.process);
+        this.processNode();
     }
 
     processNode() {
@@ -59,13 +58,11 @@ export default class AudioAnalyzer {
     }
 
     stop() {
-        this.script.removeEventListener('audioprocess', this.processNode);
+        cancelAnimationFrame(this.process);
     }
 
     connect() {
         this.analyser.connect(this.context.destination);
-        this.analyser.connect(this.script);
-        this.script.connect(this.context.destination);
     }
 
     destroy() {
@@ -74,6 +71,8 @@ export default class AudioAnalyzer {
         this.source.disconnect();
         this.analyser.disconnect();
     }
+
+
 
     mapNodeToFrequency() {
         const highFreq = [];
