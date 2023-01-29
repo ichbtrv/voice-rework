@@ -23,6 +23,7 @@ export default class AudioAnalyzer {
     source: MediaElementAudioSourceNode;
     spectrum: Uint8Array;
     store: Writable<Uint8Array>;
+    requestId: number;
 
     constructor(source) {
         this.context = new AudioContext({ sampleRate: 44100 });
@@ -42,23 +43,18 @@ export default class AudioAnalyzer {
     }
 
     process() {
-        requestAnimationFrame(this.process);
+        this.requestId = requestAnimationFrame(this.process);
         this.processNode();
     }
 
     processNode() {
         this.analyser.getByteFrequencyData(this.spectrum);
-        const fre = this.mapNodeToFrequency();
-        const arr = [...fre.veryLow, ...fre.low, ...fre.high, ...fre.h];
-        if (arr.length <= 150) {
-            arr.unshift(...Array.from({ length: 150 - arr.length }).fill(0));
-        }
-
+        const arr = this.mapNodeToFrequency();
         this.store.set(arr);
     }
 
     stop() {
-        cancelAnimationFrame(this.process);
+        cancelAnimationFrame(this.requestId);
     }
 
     connect() {
@@ -102,12 +98,9 @@ export default class AudioAnalyzer {
             }
         });
 
-        return {
-            h: HFreq,
-            high: highFreq,
-            mid: midFreq,
-            low: lowFreq,
-            veryLow: veryLowReq
-        };
+      const frequencies = [...HFreq, ...highFreq, ...midFreq, ...lowFreq, ...veryLowReq];
+    const mappedFrequencies = frequencies.map(v => Math.round(v * 255));
+
+    return new Uint8Array(mappedFrequencies);
     }
 }
